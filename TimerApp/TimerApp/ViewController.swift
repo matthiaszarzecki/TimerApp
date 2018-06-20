@@ -39,7 +39,7 @@ class ViewController: UIViewController {
             timer.invalidate()
         } else {
             secondsElapsed += 1
-            timerDisplay.text = timeString(time: TimeInterval(secondsElapsed))
+            updateDisplay()
         }
     }
     
@@ -66,13 +66,17 @@ class ViewController: UIViewController {
     @IBAction func resetButtonClicked(_ sender: Any) {
         timer.invalidate()
         secondsElapsed = 0
-        timerDisplay.text = timeString(time: TimeInterval(secondsElapsed))
+        updateDisplay()
         isTimerRunning = false
         pauseButton.isEnabled = false
         startButton.isEnabled = true
     }
     
-    func timeString(time: TimeInterval) -> String {
+    private func updateDisplay() {
+        timerDisplay.text = timeString(time: TimeInterval(secondsElapsed))
+    }
+    
+    private func timeString(time: TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
